@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saksham AI face detect</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Load face-api.js from unpkg CDN -->
+    <script src="https://unpkg.com/@vladmandic/face-api/dist/face-api.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Controls -->
+        <aside class="sidebar glass-panel">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>SAKSHAM AI</h1>
+            </div>
+            
+            <p class="description">Real-time edge computing face detection and analysis engine.</p>
+            
+            <div class="controls">
+                <h3>Detection Modules</h3>
+                
+                <label class="toggle-switch">
+                    <input type="checkbox" id="detect-boxes" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">Bounding Boxes</span>
+                </label>
+                
+                <label class="toggle-switch">
+                    <input type="checkbox" id="detect-landmarks" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">Facial Landmarks</span>
+                </label>
+                
+                <label class="toggle-switch">
+                    <input type="checkbox" id="detect-expressions" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">Expressions</span>
+                </label>
+
+                <label class="toggle-switch">
+                    <input type="checkbox" id="detect-age-gender" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">Age & Gender</span>
+                </label>
+
+                <label class="toggle-switch">
+                    <input type="checkbox" id="detect-recognition" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">Face Recognition</span>
+                </label>
+            </div>
+            
+            <div class="identity-panel glass-panel-inner">
+                <h3>Identity</h3>
+                <div class="input-group">
+                    <input type="text" id="register-name" placeholder="Enter your name..." autocomplete="off">
+                    <button id="register-btn" class="btn-primary">Save Face</button>
+                </div>
+                <div id="register-status" class="status-msg"></div>
+            </div>
+            
+            <div class="status-panel">
+                <h3>System Status</h3>
+                <div class="status-item">
+                    <span class="status-indicator loading" id="model-status-indicator"></span>
+                    <span id="model-status-text">Loading AI Models...</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-indicator error" id="cam-status-indicator"></span>
+                    <span id="cam-status-text">Camera Inactive</span>
+                </div>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric-box">
+                    <span class="metric-value" id="fps-counter">0</span>
+                    <span class="metric-label">FPS</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-value" id="face-count">0</span>
+                    <span class="metric-label">FACES</span>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Video Area -->
+        <main class="video-container">
+            <div class="video-wrapper glass-panel">
+                <video id="video" width="720" height="560" autoplay muted playsinline></video>
+                <!-- Canvas injected by JS will go here -->
+                
+                <!-- Loading Overlay -->
+                <div id="loader-overlay" class="loader-overlay">
+                    <div class="spinner"></div>
+                    <h2 id="loader-text">Initializing Engine...</h2>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
